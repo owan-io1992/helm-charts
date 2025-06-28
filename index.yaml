@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  httpbin:
+  - apiVersion: v2
+    appVersion: latest
+    created: "2025-06-28T11:04:19.152909107+08:00"
+    description: A Helm chart for Kubernetes
+    digest: 22c66a048f0004bb1c2ba65d8bc2cf0546b2f3db27c1a8dd7b53ad0a5d5d29fc
+    name: httpbin
+    type: application
+    urls:
+    - https://github.com/owan-io1992/helm-charts/releases/download/httpbin-0.1.0/httpbin-0.1.0.tgz
+    version: 0.1.0
+generated: "2025-06-28T11:04:19.152916107+08:00"
