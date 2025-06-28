@@ -1,0 +1,6 @@
+dependencies:
+- name: self-sign-cert
+  repository: oci://harbor-cloud.timber.zndev.link/helm-charts
+  version: 0.1.0
+digest: sha256:cf0db82c2f7fbc31a2ec071f0b43f7010025ef3def441dc2da842231a8f496b8
+generated: "2023-12-11T17:03:59.034988613+08:00"
