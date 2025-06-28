@@ -54,6 +54,33 @@ ingress:
           pathType: Prefix
   # tls: []
 
+gateway:
+  enabled: false
+  # The name of the GatewayClass resource.
+  # In GKE, this should be "gke-l7-gxlb" for multi-cluster and "gke-l7-rilb" for single-cluster.
+  # In Istio, this should be "istio".
+  gatewayClassName: ""
+  # The name of an existing Gateway resource to bind to.
+  # If not specified, a new Gateway resource is created.
+  gatewayName: ""
+  # The namespace of an existing Gateway resource to bind to.
+  # If not specified, the new Gateway resource is created in the same namespace as the chart.
+  gatewayNamespace: ""
+  # Listeners for the Gateway resource.
+  # The name of the listener should match an entryPoint on the Gateway Controller.
+  listeners:
+    - name: http
+      port: 8000
+      protocol: HTTP
+      allowedRoutes:
+        namespaces:
+          from: Same
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: PathPrefix
+
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
