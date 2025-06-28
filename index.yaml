@@ -3,6 +3,16 @@ entries:
   httpbin:
   - apiVersion: v2
     appVersion: latest
+    created: "2025-06-28T11:41:37.861870172+08:00"
+    description: A Helm chart for Kubernetes
+    digest: 1c08ac15f9adf3298b9edddf8a7845210810568477fbb2284f29c19edf9d4b2f
+    name: httpbin
+    type: application
+    urls:
+    - https://github.com/owan-io1992/helm-charts/releases/download/httpbin-0.1.4/httpbin-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
+    appVersion: latest
     created: "2025-06-28T11:10:32.064011014+08:00"
     description: A Helm chart for Kubernetes
     digest: 9a3c56a4b7cb6833f0fedbe7341974ba41a745ce46c4032a9fb798fbbdda5042
@@ -21,4 +31,4 @@ entries:
     urls:
     - https://github.com/owan-io1992/helm-charts/releases/download/httpbin-0.1.0/httpbin-0.1.0.tgz
     version: 0.1.0
-generated: "2025-06-28T11:10:32.064027454+08:00"
+generated: "2025-06-28T11:41:37.861929772+08:00"
