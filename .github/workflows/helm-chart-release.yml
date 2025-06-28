@@ -30,3 +30,4 @@ jobs:
         with:
           charts_dir: charts
           config: cr.yaml
+          packages_with_index: true
