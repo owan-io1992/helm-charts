@@ -1,0 +1,22 @@
+name: debug
+
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  release:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: show context
+        run: |
+          echo runner.name: ${{ runner.name }}
+          echo runner.os: ${{ runner.os }}
+          echo runner.arch: ${{ runner.arch }}
+          echo runner.environment: ${{ runner.environment }}
