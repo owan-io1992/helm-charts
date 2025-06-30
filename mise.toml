@@ -1,0 +1,12 @@
+[tools]
+helm = "3.18.2"
+helm-cr = "1.8.1"
+helm-docs = "1.14.2"
+sops = "3.10.2"
+yq = "latest"
+
+[env]
+HELM_SECRETS_VERSION = '4.6.5'
+
+[hooks]
+enter = ".cmd/helm_secrets.sh"
