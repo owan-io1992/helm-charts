@@ -3,6 +3,18 @@ entries:
   httpbin:
   - apiVersion: v2
     appVersion: latest
+    created: "2025-06-30T09:16:13.064404478+08:00"
+    description: 'this chart help create a [httpbin](https://github.com/mccutchen/go-httpbin)
+      for internal testing  it''s have multiple api please read official [doc](https://httpbingo.org)
+      for more info '
+    digest: 1bb03d4837f816904befb90037a80d123dafd18b45cdc6beb1d7214ba3615188
+    name: httpbin
+    type: application
+    urls:
+    - https://github.com/owan-io1992/helm-charts/releases/download/httpbin-0.1.6/httpbin-0.1.6.tgz
+    version: 0.1.6
+  - apiVersion: v2
+    appVersion: latest
     created: "2025-06-28T15:06:29.074429929+08:00"
     description: A Helm chart for Kubernetes
     digest: d46416647ca3cba9b5a71f81d7df0b5ecb43613892a4d3e26c16392994e97e38
@@ -41,4 +53,4 @@ entries:
     urls:
     - https://github.com/owan-io1992/helm-charts/releases/download/httpbin-0.1.0/httpbin-0.1.0.tgz
     version: 0.1.0
-generated: "2025-06-28T15:06:29.074451089+08:00"
+generated: "2025-06-30T09:16:13.064426958+08:00"
