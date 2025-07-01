@@ -1,5 +1,17 @@
 apiVersion: v1
 entries:
+  adot:
+  - apiVersion: v2
+    appVersion: v0.43.3
+    created: "2025-07-01T14:31:15.128295528+08:00"
+    description: 'this char running a AWS Distro for OpenTelemetry Collector (ADOT
+      Collector)   [git repo](https://github.com/aws-observability/aws-otel-collector)   [documents](https://aws-otel.github.io)   [image](https://gallery.ecr.aws/aws-observability/aws-otel-collector)   '
+    digest: d066b0942b92c77274f17fa711914b4e6c105b8696ba57fc681563185004ff66
+    name: adot
+    type: application
+    urls:
+    - https://github.com/owan-io1992/helm-charts/releases/download/adot-0.1.0/adot-0.1.0.tgz
+    version: 0.1.0
   devpi:
   - apiVersion: v2
     appVersion: 6.16.0
@@ -65,4 +77,4 @@ entries:
     urls:
     - https://github.com/owan-io1992/helm-charts/releases/download/httpbin-0.1.0/httpbin-0.1.0.tgz
     version: 0.1.0
-generated: "2025-07-01T14:28:56.018883212+08:00"
+generated: "2025-07-01T14:31:15.828295525+08:00"
