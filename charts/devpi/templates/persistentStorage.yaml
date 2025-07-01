@@ -1,0 +1,22 @@
+{{- if .Values.persistentStorage.enabled }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "devpi.fullname" . }}
+  labels:
+    {{- include "devpi.labels" . | nindent 4 }}
+  {{- with .Values.persistentStorage.annotations  }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  accessModes:
+    {{- range .Values.persistentStorage.accessModes }}
+    - {{ . | quote }}
+    {{- end }}
+  volumeMode: {{ .Values.persistentStorage.volumeMode }}
+  resources:
+    requests:
+      storage: {{ .Values.persistentStorage.size | quote }}
+  storageClassName: {{ .Values.persistentStorage.storageClassName }}
+{{- end }}
