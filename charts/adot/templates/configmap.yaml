@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "adot.fullname" . }}
+  labels:
+    {{- include "adot.labels" . | nindent 4 }}
+data:
+  otel-config.yaml: |
+    {{- toYaml .Values.adot.config | nindent 4 }}

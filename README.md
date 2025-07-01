@@ -1,2 +1,2 @@
-this is my public repo for host helm chart  
+this is owan's public repo for host helm chart  
 
