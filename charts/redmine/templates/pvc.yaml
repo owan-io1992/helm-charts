@@ -1,0 +1,50 @@
+{{ if .Values.redmine.persistentStorage.enabled }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ template "redmine.fullname" . }}-files
+  labels:
+    app.kubernetes.io/component: pvc
+  {{- include "redmine.labels" . | nindent 4}}
+  annotations:
+    "helm.sh/resource-policy": keep
+
+spec:
+  accessModes:
+    {{ range .Values.redmine.persistentStorage.accessModes }}
+    - {{ . | quote }}
+    {{ end  }}
+  volumeMode: {{ .Values.redmine.persistentStorage.volumeMode }}
+  resources:
+    requests:
+      storage: {{ default "10G" .Values.redmine.persistentStorage.size | quote }}
+  storageClassName: {{ .Values.redmine.persistentStorage.storageClassName }}
+
+{{- end }}
+
+---
+
+{{ if .Values.redmine.persistentStorage.enabled }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ template "redmine.fullname" . }}-configs
+  labels:
+    app.kubernetes.io/component: pvc
+  {{- include "redmine.labels" . | nindent 4}}
+  annotations:
+    "helm.sh/resource-policy": keep
+
+spec:
+  accessModes:
+    {{ range .Values.redmine.persistentStorage.accessModes }}
+    - {{ . | quote }}
+    {{ end  }}
+  volumeMode: {{ .Values.redmine.persistentStorage.volumeMode }}
+  resources:
+    requests:
+      storage: 1G
+  storageClassName: {{ .Values.redmine.persistentStorage.storageClassName }}
+
+{{- end }}
+

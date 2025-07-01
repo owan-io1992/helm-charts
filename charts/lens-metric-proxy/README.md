@@ -12,43 +12,34 @@ PROMETHEUS SERVICE ADDRESS: lens-metric/lens-metric-proxy:80
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| affinity | object | `{}` |  |
-| config.nginx_conf | string | `"user  nginx;\nworker_processes  auto;\n\nerror_log  /var/log/nginx/error.log notice;\npid        /var/run/nginx.pid;\n\n\nevents {\n    worker_connections  1024;\n}\n\n\nhttp {\n    include       /etc/nginx/mime.types;\n    default_type  application/octet-stream;\n\n    log_format  main  '$remote_addr - $remote_user [$time_local] \"$request\" '\n                      '$status $body_bytes_sent \"$http_referer\" '\n                      '\"$http_user_agent\" \"$http_x_forwarded_for\" \"$request_body\"';\n\n    access_log  /var/log/nginx/access.log  main;\n\n    sendfile        on;\n    #tcp_nopush     on;\n\n    keepalive_timeout  65;\n\n    #gzip  on;\n\n    include /etc/nginx/conf.d/*.conf;\n}\n"` |  |
-| config.prometheus_conf_template | string | `"server {\n    listen 80 default_server;\n\n    proxy_connect_timeout       300;\n    proxy_send_timeout          300;\n    proxy_read_timeout          300;\n    send_timeout                300;\n    resolver 1.1.1.1;\n    location /health {\n        return 200;\n    }\n    location / {\n        proxy_pass http://$MIMIR_HOST/prometheus$request_uri;\n        # proxy_set_header X-Scope-OrgID \"$MIMIR_TENANT\";\n    }\n\n}\n"` |  |
-| env[0].name | string | `"PROMETHEUS_HOST"` |  |
-| env[0].value | string | `""` |  |
-| fullnameOverride | string | `""` |  |
-| image.pullPolicy | string | `"IfNotPresent"` |  |
-| image.repository | string | `"nginx"` |  |
-| image.tag | string | `""` |  |
-| imagePullSecrets | list | `[]` |  |
-| livenessProbe.httpGet.path | string | `"/health"` |  |
-| livenessProbe.httpGet.port | string | `"http"` |  |
-| nameOverride | string | `""` |  |
-| nodeSelector | object | `{}` |  |
-| podAnnotations | object | `{}` |  |
-| podLabels | object | `{}` |  |
-| podSecurityContext | object | `{}` |  |
-| readinessProbe.httpGet.path | string | `"/health"` |  |
-| readinessProbe.httpGet.port | string | `"http"` |  |
-| replicaCount | int | `1` |  |
-| resources | object | `{}` |  |
-| securityContext | object | `{}` |  |
-| service.port | int | `80` |  |
-| service.type | string | `"ClusterIP"` |  |
-| serviceAccount.annotations | object | `{}` |  |
-| serviceAccount.automount | bool | `true` |  |
-| serviceAccount.create | bool | `false` |  |
-| serviceAccount.name | string | `""` |  |
-| tolerations | list | `[]` |  |
-| volumeMounts[0].mountPath | string | `"/etc/nginx/nginx.conf"` |  |
-| volumeMounts[0].name | string | `"config"` |  |
-| volumeMounts[0].subPath | string | `"nginx.conf"` |  |
-| volumeMounts[1].mountPath | string | `"/etc/nginx/templates/prometheus.conf.template"` |  |
-| volumeMounts[1].name | string | `"config"` |  |
-| volumeMounts[1].subPath | string | `"prometheus.conf.template"` |  |
-| volumes[0].configMap.name | string | `"{{ include \"lens-metric-proxy.fullname\" . }}"` |  |
-| volumes[0].name | string | `"config"` |  |
+| affinity | object | `{}` | Affinity for pod assignment |
+| config.nginx_conf | string | `"user  nginx;\nworker_processes  auto;\n\nerror_log  /var/log/nginx/error.log notice;\npid        /var/run/nginx.pid;\n\n\nevents {\n    worker_connections  1024;\n}\n\n\nhttp {\n    include       /etc/nginx/mime.types;\n    default_type  application/octet-stream;\n\n    log_format  main  '$remote_addr - $remote_user [$time_local] \"$request\" '\n                      '$status $body_bytes_sent \"$http_referer\" '\n                      '\"$http_user_agent\" \"$http_x_forwarded_for\" \"$request_body\"';\n\n    access_log  /var/log/nginx/access.log  main;\n\n    sendfile        on;\n    #tcp_nopush     on;\n\n    keepalive_timeout  65;\n\n    #gzip  on;\n\n    include /etc/nginx/conf.d/*.conf;\n}\n"` | Main nginx configuration |
+| config.prometheus_conf_template | string | `"server {\n    listen 80 default_server;\n\n    proxy_connect_timeout       300;\n    proxy_send_timeout          300;\n    proxy_read_timeout          300;\n    send_timeout                300;\n    resolver 1.1.1.1;\n    location /health {\n        return 200;\n    }\n    location / {\n        proxy_pass http://$PROMETHEUS_HOST/prometheus$request_uri;\n        # proxy_set_header X-Scope-OrgID \"$MIMIR_TENANT\";\n    }\n\n}\n"` | Prometheus proxy configuration template for nginx |
+| env[0] | object | `{"name":"PROMETHEUS_HOST","value":""}` | The host of the prometheus backend |
+| fullnameOverride | string | `""` | Override the full name |
+| image.pullPolicy | string | `"IfNotPresent"` | Image pull policy |
+| image.repository | string | `"nginx"` | Image repository |
+| image.tag | string | `""` | Overrides the image tag whose default is the chart appVersion. |
+| imagePullSecrets | list | `[]` | Image pull secrets |
+| livenessProbe | object | `{"httpGet":{"path":"/health","port":"http"}}` | Liveness probe configuration |
+| nameOverride | string | `""` | Override the chart name |
+| nodeSelector | object | `{}` | Node selector for pod assignment |
+| podAnnotations | object | `{}` | Annotations for the pod |
+| podLabels | object | `{}` | Labels for the pod |
+| podSecurityContext | object | `{}` | Pod security context e.g. fsGroup: 2000 |
+| readinessProbe | object | `{"httpGet":{"path":"/health","port":"http"}}` | Readiness probe configuration |
+| replicaCount | int | `1` | Number of replicas |
+| resources | object | `{}` | Resource requests and limits e.g. limits:   cpu: 100m   memory: 128Mi requests:   cpu: 100m   memory: 128Mi |
+| securityContext | object | `{}` | Container security context e.g. capabilities:   drop:   - ALL readOnlyRootFilesystem: true runAsNonRoot: true runAsUser: 1000 |
+| service.port | int | `80` | Service port |
+| service.type | string | `"ClusterIP"` | Service type |
+| serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
+| serviceAccount.automount | bool | `true` | Automatically mount a ServiceAccount's API credentials? |
+| serviceAccount.create | bool | `false` | Specifies whether a service account should be created |
+| serviceAccount.name | string | `""` | The name of the service account to use. If not set and create is true, a name is generated using the fullname template |
+| tolerations | list | `[]` | Tolerations for pod assignment |
+| volumeMounts | list | `[{"mountPath":"/etc/nginx/nginx.conf","name":"config","subPath":"nginx.conf"},{"mountPath":"/etc/nginx/templates/prometheus.conf.template","name":"config","subPath":"prometheus.conf.template"}]` | Volume mounts for the container |
+| volumes | list | `[{"configMap":{"name":"{{ include \"lens-metric-proxy.fullname\" . }}"},"name":"config"}]` | Volumes to mount |
 
 ----------------------------------------------
 Autogenerated from chart metadata using [helm-docs v1.14.2](https://github.com/norwoodj/helm-docs/releases/v1.14.2)

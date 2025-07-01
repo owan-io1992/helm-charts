@@ -1,0 +1,189 @@
+#
+# Default values for redmine.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+#
+
+# -- Number of replicas
+replicaCount: 1
+
+## Image configuration
+image:
+  # -- Image repository
+  repository: redmine
+  # -- Image pull policy
+  pullPolicy: IfNotPresent
+  # -- Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+# -- Image pull secrets
+imagePullSecrets: []
+# -- Override the chart name
+nameOverride: ""
+# -- Override the full name
+fullnameOverride: ""
+
+## Service account configuration
+serviceAccount:
+  # -- Specifies whether a service account should be created
+  create: false
+  # -- Automatically mount a ServiceAccount's API credentials?
+  automount: true
+  # -- Annotations to add to the service account
+  annotations: {}
+  # -- The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+# -- Annotations for the pod
+podAnnotations: {}
+# -- Labels for the pod
+podLabels: {}
+
+# -- Pod security context
+# e.g.
+# fsGroup: 2000
+podSecurityContext: {}
+
+# -- Container security context
+# e.g.
+# capabilities:
+#   drop:
+#   - ALL
+# readOnlyRootFilesystem: true
+# runAsNonRoot: true
+# runAsUser: 1000
+securityContext: {}
+
+## Service configuration
+service:
+  # -- Service type
+  type: ClusterIP
+  # -- Service port
+  port: 3000
+
+## Ingress configuration
+ingress:
+  # -- Enable ingress
+  enabled: true
+  # -- Ingress class name
+  className: ""
+  # -- Ingress annotations
+  annotations: {}
+  # -- Ingress hosts
+  hosts:
+    - host: redmine.chart-example.local
+      paths:
+        - path: /
+          pathType: Prefix
+  # -- Ingress TLS configuration
+  tls: []
+
+# -- Resource requests and limits
+# e.g.
+# limits:
+#   cpu: 4
+#   memory: 4Gi
+# requests:
+#   cpu: 1
+#   memory: 1Gi
+resources: {}
+
+# -- Liveness probe configuration
+livenessProbe:
+  httpGet:
+    path: /
+    port: http
+  # -- Initial delay seconds for liveness probe
+  initialDelaySeconds: 60
+# -- Readiness probe configuration
+readinessProbe:
+  httpGet:
+    path: /
+    port: http
+  # -- Period seconds for readiness probe
+  periodSeconds: 60
+
+# -- Node selector for pod assignment
+nodeSelector: {}
+# -- Tolerations for pod assignment
+tolerations: []
+# -- Affinity for pod assignment
+affinity: {}
+
+## Redmine specific configuration
+redmine:
+  ## Environment variables for Redmine container
+  env:
+    # -- PostgreSQL database host
+    REDMINE_DB_POSTGRES: postgres
+    # -- PostgreSQL database username
+    REDMINE_DB_USERNAME: redmine
+    # -- PostgreSQL database password
+    REDMINE_DB_PASSWORD: "password"
+    # -- PostgreSQL database name
+    REDMINE_DB_DATABASE: redmine
+    # -- PostgreSQL database encoding
+    REDMINE_DB_ENCODING: utf8
+    # -- Migrate Redmine plugins
+    REDMINE_PLUGINS_MIGRATE: "true"
+    # -- Secret key base for Redmine
+    SECRET_KEY_BASE: supersecretkey
+  ## Persistent storage configuration for Redmine
+  persistentStorage:
+    # -- Enable persistent storage
+    enabled: true
+    # -- Storage class name for persistent volume
+    storageClassName: ""
+    # -- Access modes for persistent volume
+    accessModes:
+      - ReadWriteOnce
+    # -- Volume mode for persistent volume
+    volumeMode: Filesystem
+    # -- Size of the persistent volume
+    size: 10Gi
+  ## Redmine application configuration
+  config:
+    default:
+      email_delivery:
+
+## Network policy configuration
+# -- If enabled, will limit redmine network access
+networkpolicy:
+  enabled: false
+
+## PostgreSQL database configuration
+postgresql:
+  # -- PostgreSQL architecture
+  architecture: standalone
+  ## Authentication configuration for PostgreSQL
+  auth:
+    # -- Enable postgres user
+    enablePostgresUser: false
+    # -- Database name
+    database: redmine
+    # -- Username for database access
+    username: redmine
+    # -- Password for database access
+    password: "password"
+    # -- Generate password
+    generate: false
+    # -- Existing secret for database credentials
+    existingSecret: ""
+
+  ## Primary PostgreSQL instance configuration
+  primary:
+    ## Persistence configuration for primary PostgreSQL instance
+    persistence:
+      # -- Size of the persistent volume
+      size: 10Gi
+      # -- Storage class for persistent volume
+      storageClass: ""
+      # -- Annotations for persistent volume
+      annotations:
+        helm.sh/resource-policy: keep
+    ## Resource requests and limits for primary PostgreSQL instance
+    resources:
+      limits:
+        cpu: 2
+        memory: 1Gi

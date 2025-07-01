@@ -1,71 +1,90 @@
-# Default values for lens-metric-proxy.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
-
+# -- Number of replicas
 replicaCount: 1
 
+## Image configuration
 image:
+  # -- Image repository
   repository: nginx
+  # -- Image pull policy
   pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
+  # -- Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
+# -- Image pull secrets
 imagePullSecrets: []
+# -- Override the chart name
 nameOverride: ""
+# -- Override the full name
 fullnameOverride: ""
 
+## Service account configuration
 serviceAccount:
-  # Specifies whether a service account should be created
+  # -- Specifies whether a service account should be created
   create: false
-  # Automatically mount a ServiceAccount's API credentials?
+  # -- Automatically mount a ServiceAccount's API credentials?
   automount: true
-  # Annotations to add to the service account
+  # -- Annotations to add to the service account
   annotations: {}
-  # The name of the service account to use.
+  # -- The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
   name: ""
 
+# -- Annotations for the pod
 podAnnotations: {}
+# -- Labels for the pod
 podLabels: {}
 
+# -- Pod security context
+# e.g.
+# fsGroup: 2000
 podSecurityContext: {}
-  # fsGroup: 2000
 
+# -- Container security context
+# e.g.
+# capabilities:
+#   drop:
+#   - ALL
+# readOnlyRootFilesystem: true
+# runAsNonRoot: true
+# runAsUser: 1000
 securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
 
+## Service configuration
 service:
+  # -- Service type
   type: ClusterIP
+  # -- Service port
   port: 80
 
+# -- Resource requests and limits
+# e.g.
+# limits:
+#   cpu: 100m
+#   memory: 128Mi
+# requests:
+#   cpu: 100m
+#   memory: 128Mi
 resources: {}
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
 
+# -- Liveness probe configuration
 livenessProbe:
   httpGet:
     path: /health
     port: http
+# -- Readiness probe configuration
 readinessProbe:
   httpGet:
     path: /health
     port: http
 
-volumes: 
+# -- Volumes to mount
+volumes:
   - name: config
     configMap:
       name: '{{ include "lens-metric-proxy.fullname" . }}'
 
-volumeMounts: 
+# -- Volume mounts for the container
+volumeMounts:
   - name: config
     mountPath: /etc/nginx/nginx.conf
     subPath: nginx.conf
@@ -73,13 +92,18 @@ volumeMounts:
     mountPath: /etc/nginx/templates/prometheus.conf.template
     subPath: prometheus.conf.template
 
+# -- Node selector for pod assignment
 nodeSelector: {}
 
+# -- Tolerations for pod assignment
 tolerations: []
 
+# -- Affinity for pod assignment
 affinity: {}
 
+## ConfigMap configuration
 config:
+  # -- Main nginx configuration
   nginx_conf: |
     user  nginx;
     worker_processes  auto;
@@ -113,6 +137,7 @@ config:
         include /etc/nginx/conf.d/*.conf;
     }
 
+  # -- Prometheus proxy configuration template for nginx
   prometheus_conf_template: |
     server {
         listen 80 default_server;
@@ -126,14 +151,17 @@ config:
             return 200;
         }
         location / {
-            proxy_pass http://$MIMIR_HOST/prometheus$request_uri;
+            proxy_pass http://$PROMETHEUS_HOST/prometheus$request_uri;
             # proxy_set_header X-Scope-OrgID "$MIMIR_TENANT";
         }
 
     }
 
+## Environment variables for the container
 env:
+  # -- The host of the prometheus backend
   - name: "PROMETHEUS_HOST"
     value: ""
+  # -- The tenant id for mimir
   # - name: "MIMIR_TENANT"
   #   value: ""
