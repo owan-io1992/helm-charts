@@ -1,11 +1,11 @@
 apiVersion: v2
-name: adot
+name: lens-metric-proxy
 description: |
-  this char running a AWS Distro for OpenTelemetry Collector (ADOT Collector)   
-  [git repo](https://github.com/aws-observability/aws-otel-collector)   
-  [documents](https://aws-otel.github.io)   
-  [image](https://gallery.ecr.aws/aws-observability/aws-otel-collector)   
- 
+  this chart help create a proxy for [lens](https://k8slens.dev) query external metric data source  
+  it's helpful when you have self-managed prometeus   
+  lens config   
+  PROMETHEUS: Helm   
+  PROMETHEUS SERVICE ADDRESS: lens-metric/lens-metric-proxy:80   
 # A chart can be either an 'application' or a 'library' chart.
 #
 # Application charts are a collection of templates that can be packaged into versioned archives
@@ -25,4 +25,4 @@ version: 0.1.0
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
-appVersion: "v0.43.3"
+appVersion: "stable"

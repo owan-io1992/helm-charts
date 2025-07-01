@@ -2,10 +2,10 @@
 
 ![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.43.3](https://img.shields.io/badge/AppVersion-v0.43.3-informational?style=flat-square)
 
-# this char running a AWS Distro for OpenTelemetry Collector (ADOT Collector)
-[git repo](https://github.com/aws-observability/aws-otel-collector)
-[documents](https://aws-otel.github.io)
-[image](https://gallery.ecr.aws/aws-observability/aws-otel-collector)
+this char running a AWS Distro for OpenTelemetry Collector (ADOT Collector)  
+[git repo](https://github.com/aws-observability/aws-otel-collector)  
+[documents](https://aws-otel.github.io)  
+[image](https://gallery.ecr.aws/aws-observability/aws-otel-collector)  
 
 ## Values
 

@@ -1,0 +1,12 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: {{ include "lens-metric-proxy.fullname" . }}
+  labels:
+    {{- include "lens-metric-proxy.labels" . | nindent 4 }}
+data:
+  nginx.conf: |
+{{ .Values.config.nginx_conf | indent 4 }}
+
+  prometheus.conf.template: |
+{{ .Values.config.prometheus_conf_template | indent 4 }}

@@ -2,10 +2,9 @@
 
 ![Version: 0.1.6](https://img.shields.io/badge/Version-0.1.6-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: latest](https://img.shields.io/badge/AppVersion-latest-informational?style=flat-square)
 
-this chart help create a [httpbin](https://github.com/mccutchen/go-httpbin) for internal testing
-
-it's have multiple api
-please read official [doc](https://httpbingo.org) for more info
+this chart help create a [httpbin](https://github.com/mccutchen/go-httpbin) for internal testing 
+it's have multiple api 
+please read official [doc](https://httpbingo.org) for more info 
 
 ## Values
 
