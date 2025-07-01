@@ -1,10 +1,9 @@
 apiVersion: v2
 name: httpbin
 description: |
-  this chart help create a [httpbin](https://github.com/mccutchen/go-httpbin) for internal testing
-
-  it's have multiple api
-  please read official [doc](https://httpbingo.org) for more info
+  this chart help create a [httpbin](https://github.com/mccutchen/go-httpbin) for internal testing  
+  it's have multiple api  
+  please read official [doc](https://httpbingo.org) for more info  
 
 # A chart can be either an 'application' or a 'library' chart.
 #

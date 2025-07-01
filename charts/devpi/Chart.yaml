@@ -1,8 +1,8 @@
 apiVersion: v2
 name: devpi
 description: |
-  this chart start [devpi](https://devpi.net/docs/devpi/devpi/stable/%2Bd/index.html)
-  as PyPI mirror server or private indexes 
+  this chart start [devpi](https://devpi.net/docs/devpi/devpi/stable/%2Bd/index.html)  
+  as PyPI mirror server or private indexes  
 
 # A chart can be either an 'application' or a 'library' chart.
 #
