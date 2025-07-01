@@ -77,4 +77,32 @@ entries:
     urls:
     - https://github.com/owan-io1992/helm-charts/releases/download/httpbin-0.1.0/httpbin-0.1.0.tgz
     version: 0.1.0
-generated: "2025-07-01T14:31:15.828295525+08:00"
+  lens-metric-proxy:
+  - apiVersion: v2
+    appVersion: stable
+    created: "2025-07-01T15:12:57.195245979+08:00"
+    description: 'this chart help create a proxy for [lens](https://k8slens.dev) query
+      external metric data source   it''s helpful when you have self-managed prometeus    lens
+      config    PROMETHEUS: Helm    PROMETHEUS SERVICE ADDRESS: lens-metric/lens-metric-proxy:80    '
+    digest: f2c2c12941e843b644b4dd451521d7e1ba6f93005c8a9b76dad65cd75b75dc1c
+    name: lens-metric-proxy
+    type: application
+    urls:
+    - https://github.com/owan-io1992/helm-charts/releases/download/lens-metric-proxy-0.1.0/lens-metric-proxy-0.1.0.tgz
+    version: 0.1.0
+  redmine:
+  - apiVersion: v2
+    appVersion: 6.0.5
+    created: "2025-07-01T15:12:57.553168943+08:00"
+    dependencies:
+    - name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: ~16.7.14
+    description: A Helm chart for Kubernetes
+    digest: 72aad5c19b0d9a4914f3b5e265167ca25e788bbc3e597d441a7e90d007fe8bff
+    name: redmine
+    type: application
+    urls:
+    - https://github.com/owan-io1992/helm-charts/releases/download/redmine-0.1.0/redmine-0.1.0.tgz
+    version: 0.1.0
+generated: "2025-07-01T15:12:57.553188663+08:00"
