@@ -105,4 +105,15 @@ entries:
     urls:
     - https://github.com/owan-io1992/helm-charts/releases/download/redmine-0.1.0/redmine-0.1.0.tgz
     version: 0.1.0
-generated: "2025-07-01T15:12:57.553188663+08:00"
+  shlink:
+  - apiVersion: v2
+    appVersion: stable
+    created: "2025-07-01T15:39:48.092042712+08:00"
+    description: A Helm chart for shlink
+    digest: 2f2f8d6df603564b310c46f11b9a7bd5cd5e1d39da55f087d86665f232462b14
+    name: shlink
+    type: application
+    urls:
+    - https://github.com/owan-io1992/helm-charts/releases/download/shlink-0.1.0/shlink-0.1.0.tgz
+    version: 0.1.0
+generated: "2025-07-01T15:39:48.092058312+08:00"
