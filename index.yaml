@@ -1,5 +1,17 @@
 apiVersion: v1
 entries:
+  devpi:
+  - apiVersion: v2
+    appVersion: 6.16.0
+    created: "2025-07-01T14:28:56.018853851+08:00"
+    description: 'this chart start [devpi](https://devpi.net/docs/devpi/devpi/stable/%2Bd/index.html)
+      as PyPI mirror server or private indexes  '
+    digest: d93968623a7904a4f9e627088c94cfa77889fd254bfd311fd55e97dd280a2966
+    name: devpi
+    type: application
+    urls:
+    - https://github.com/owan-io1992/helm-charts/releases/download/devpi-0.1.0/devpi-0.1.0.tgz
+    version: 0.1.0
   httpbin:
   - apiVersion: v2
     appVersion: latest
@@ -53,4 +65,4 @@ entries:
     urls:
     - https://github.com/owan-io1992/helm-charts/releases/download/httpbin-0.1.0/httpbin-0.1.0.tgz
     version: 0.1.0
-generated: "2025-06-30T09:16:13.064426958+08:00"
+generated: "2025-07-01T14:28:56.018883212+08:00"
