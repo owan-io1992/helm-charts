@@ -1,0 +1,135 @@
+#
+# Default values for shlink.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+#
+
+# -- Number of replicas
+replicaCount: 1
+
+## Image configuration
+image:
+  # -- Image repository
+  repository: shlinkio/shlink
+  # -- Image pull policy
+  pullPolicy: IfNotPresent
+  # -- Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+# -- Image pull secrets
+imagePullSecrets: []
+# -- Override the chart name
+nameOverride: ""
+# -- Override the full name
+fullnameOverride: ""
+
+## Service account configuration
+serviceAccount:
+  # -- Specifies whether a service account should be created
+  create: false
+  # -- Automatically mount a ServiceAccount's API credentials?
+  automount: true
+  # -- Annotations to add to the service account
+  annotations: {}
+  # -- The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+# -- Annotations for the pod
+podAnnotations: {}
+# -- Labels for the pod
+podLabels: {}
+
+# -- Pod security context
+# e.g.
+# fsGroup: 2000
+podSecurityContext: {}
+
+# -- Container security context
+# e.g.
+# capabilities:
+#   drop:
+#   - ALL
+# readOnlyRootFilesystem: true
+# runAsNonRoot: true
+# runAsUser: 1000
+securityContext: {}
+
+## Service configuration
+service:
+  # -- Service type
+  type: ClusterIP
+  # -- Service port
+  port: 8080
+
+## Ingress configuration
+ingress:
+  # -- Enable ingress
+  enabled: false
+  # -- Ingress class name
+  className: ""
+  # -- Ingress annotations
+  annotations: {}
+  # -- Ingress hosts
+  # hosts:
+  #   - host: shlink.chart-example.local
+  #     paths:
+  #       - path: /
+  #         pathType: ImplementationSpecific
+  # -- Ingress TLS configuration
+  tls: []
+
+# -- Resource requests and limits
+resources: {}
+
+## Autoscaling configuration
+autoscaling:
+  # -- Enable autoscaling
+  enabled: false
+  # -- Minimum number of replicas
+  minReplicas: 1
+  # -- Maximum number of replicas
+  maxReplicas: 100
+  # -- Target CPU utilization percentage
+  targetCPUUtilizationPercentage: 80
+  # -- Target memory utilization percentage
+  # targetMemoryUtilizationPercentage: 80
+
+# -- Additional volumes on the output Deployment definition.
+volumes: []
+
+# -- Additional volumeMounts on the output Deployment definition.
+volumeMounts: []
+# - name: foo
+#   mountPath: "/etc/foo"
+#   readOnly: true
+
+# -- Node selector for pod assignment
+nodeSelector: {}
+
+# -- Tolerations for pod assignment
+tolerations: []
+
+# -- Affinity for pod assignment
+affinity: {}
+
+## Shlink specific configuration
+shlink:
+  ## Persistent storage configuration for Shlink
+  persistentStorage:
+    # -- Enable persistent storage
+    enabled: true
+    # -- Access modes for persistent volume
+    accessModes:
+      - ReadWriteOnce
+    # -- Volume mode for persistent volume
+    volumeMode: Filesystem
+    # -- Size of the persistent volume
+    size: "1G"
+    # -- Storage class name for persistent volume
+    storageClass: "local-path"
+  ## Environment variables for Shlink container
+  env:
+  # -- Default domain for Shlink
+  - name: DEFAULT_DOMAIN
+    value: ""

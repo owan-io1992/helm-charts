@@ -1,0 +1,21 @@
+{{ if .Values.shlink.persistentStorage.enabled }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  annotations:
+    "helm.sh/resource-policy": keep
+  name: {{ template "shlink.fullname" . }}
+  labels:
+    app.kubernetes.io/component: pvc
+  {{- include "shlink.labels" . | nindent 4}}
+spec:
+  accessModes:
+    {{ range .Values.shlink.persistentStorage.accessModes }}
+    - {{ . | quote }}
+    {{ end  }}
+  volumeMode: {{ .Values.shlink.persistentStorage.volumeMode }}
+  resources:
+    requests:
+      storage: {{ default "10G" .Values.shlink.persistentStorage.size | quote }}
+  storageClassName: {{ .Values.shlink.persistentStorage.storageClass }}
+{{- end }}
