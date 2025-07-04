@@ -166,3 +166,27 @@ affinity: {}
   #     - matchExpressions:
   #       - key: node-lifetime
   #         operator: Exists
+
+livenessProbe:
+  httpGet:
+    path: /anything/livenessProbe
+    port: http
+  # initialDelaySeconds: 0
+  # periodSeconds: 10
+  # timeoutSeconds: 1
+  # successThreshold: 1
+  # failureThreshold: 3 
+  # terminationGracePeriodSeconds: 30 # default inherit the Pod-level value for terminationGracePeriodSeconds
+
+readinessProbe: 
+  httpGet:
+    path: /anything/readinessProbe
+    port: http
+  periodSeconds: 10
+
+startupProbe: 
+  httpGet:
+    path: /anything/startupProbe
+    port: http
+  periodSeconds: 10
+  
