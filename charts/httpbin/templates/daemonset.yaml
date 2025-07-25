@@ -1,14 +1,11 @@
-{{- if eq .Values.kind "Deployment" }}
+{{- if eq .Values.kind "DaemonSet" }}
 apiVersion: apps/v1
-kind: Deployment
+kind: DaemonSet
 metadata:
   name: {{ include "httpbin.fullname" . }}
   labels:
     {{- include "httpbin.labels" . | nindent 4 }}
 spec:
-  {{- if not .Values.keda.enabled }}
-  replicas: {{ .Values.replicaCount }}
-  {{- end }}
   selector:
     matchLabels:
       {{- include "httpbin.selectorLabels" . | nindent 6 }}
@@ -71,8 +68,4 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       terminationGracePeriodSeconds: 30
-  {{- with .Values.strategy }}
-  strategy:
-    {{- toYaml . | nindent 4 }}
-  {{- end }}
 {{- end }}

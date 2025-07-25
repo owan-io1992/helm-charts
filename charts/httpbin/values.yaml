@@ -2,6 +2,8 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+kind: Deployment # can be 'Deployment', 'DaemonSet', 'StatefulSet' 
+
 # -- Number of httpbin replicas to deploy
 replicaCount: 1
 
@@ -12,7 +14,7 @@ image:
   # -- Image pull policy
   pullPolicy: IfNotPresent
   # -- Overrides the image tag whose default is the chart appVersion.
-  tag: "latest"
+  tag: ""
 
 # -- Image pull secrets
 imagePullSecrets: []
@@ -152,6 +154,17 @@ volumeMounts: []
 #   mountPath: "/etc/foo"
 #   readOnly: true
 
+# -- statefulset only
+volumeClaimTemplates: []
+  # - metadata:
+  #     name: www
+  #   spec:
+  #     accessModes: [ "ReadWriteOnce" ]
+  #     storageClassName: ""
+  #     resources:
+  #       requests:
+  #         storage: 1Gi
+
 # -- Node selector for pod assignment
 nodeSelector: {}
 
@@ -190,3 +203,13 @@ startupProbe:
     port: http
   periodSeconds: 10
   
+strategy: {}
+  # type: RollingUpdate # can be "Recreate" or "RollingUpdate"
+  # rollingUpdate:
+  #   maxUnavailable: 25%
+  #   maxSurge: 25%
+
+podDisruptionBudget:
+  enabled: false
+  # minAvailable:
+  # maxUnavailable: 
