@@ -1,10 +1,10 @@
 # httpbin
 
-![Version: 0.1.8](https://img.shields.io/badge/Version-0.1.8-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: latest](https://img.shields.io/badge/AppVersion-latest-informational?style=flat-square)
+![Version: 0.1.9](https://img.shields.io/badge/Version-0.1.9-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: latest](https://img.shields.io/badge/AppVersion-latest-informational?style=flat-square)
 
-this chart help create a [httpbin](https://github.com/mccutchen/go-httpbin) for internal testing 
-it's have multiple api 
-please read official [doc](https://httpbingo.org) for more info 
+this chart help create a [httpbin](https://github.com/mccutchen/go-httpbin) for internal testing  
+it's have multiple api  
+please read official [doc](https://httpbingo.org) for more info
 
 ## Values
 
@@ -48,7 +48,7 @@ please read official [doc](https://httpbingo.org) for more info
 | readinessProbe.httpGet.path | string | `"/anything/readinessProbe"` |  |
 | readinessProbe.httpGet.port | string | `"http"` |  |
 | readinessProbe.periodSeconds | int | `10` |  |
-| replicaCount | int | `1` | Number of httpbin replicas to deploy |
+| replicaCount | string | `"aa"` | Number of httpbin replicas to deploy |
 | resources | object | `{}` | Resource limits and requests |
 | securityContext | object | `{}` | Container security context |
 | service | object | `{"port":8080,"type":"ClusterIP"}` | Service configuration |

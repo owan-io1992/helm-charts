@@ -1,8 +1,12 @@
 [tools]
 helm = "3.18.2"
 helm-cr = "1.8.1"
+helm-ct = "3.13.0"
 helm-docs = "1.14.2"
+kubectl = "1.33.3"
+"pipx:yamale" = "latest"
 sops = "3.10.2"
+yamllint = "1.37.1"
 yq = "latest"
 
 [env]
