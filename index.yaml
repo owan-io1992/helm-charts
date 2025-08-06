@@ -27,6 +27,20 @@ entries:
   httpbin:
   - apiVersion: v2
     appVersion: latest
+    created: "2025-08-06T20:07:48.631562741+08:00"
+    description: 'this chart help create a [httpbin](https://github.com/mccutchen/go-httpbin)
+      for internal testing    it''s have multiple api    please read official [doc](https://httpbingo.org)
+      for more info   '
+    digest: 883ccdb54a507e51c5c9b274ffe3187271d030f4ae6a8aefe3f674e981e4a279
+    maintainers:
+    - name: owan
+    name: httpbin
+    type: application
+    urls:
+    - https://github.com/owan-io1992/helm-charts/releases/download/httpbin-0.1.9/httpbin-0.1.9.tgz
+    version: 0.1.9
+  - apiVersion: v2
+    appVersion: latest
     created: "2025-07-25T10:07:49.217950519+08:00"
     description: 'this chart help create a [httpbin](https://github.com/mccutchen/go-httpbin)
       for internal testing   it''s have multiple api   please read official [doc](https://httpbingo.org)
@@ -140,4 +154,4 @@ entries:
     urls:
     - https://github.com/owan-io1992/helm-charts/releases/download/shlink-0.1.0/shlink-0.1.0.tgz
     version: 0.1.0
-generated: "2025-07-25T10:07:49.217987159+08:00"
+generated: "2025-08-06T20:07:48.631604341+08:00"
