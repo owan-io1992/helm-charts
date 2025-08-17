@@ -13,4 +13,4 @@ yq = "latest"
 HELM_SECRETS_VERSION = '4.6.5'
 
 [hooks]
-enter = ".cmd/helm_secrets.sh"
+enter = "{{ config_root }}/.cmd/helm_secrets.sh"

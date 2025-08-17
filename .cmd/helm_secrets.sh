@@ -2,7 +2,7 @@
 # set -x
 
 install_flag=0
-helm plugin list | grep secrets
+helm plugin list | grep secrets &> /dev/null
 installed_status=$?
 
 # ig no installed helm secrets
@@ -12,7 +12,7 @@ if [[ ${installed_status} -ne 0 ]]; then
 fi
 
 # check version is not missmatch 
-echo `helm plugin list | grep secrets` | grep ${HELM_SECRETS_VERSION}
+echo `helm plugin list | grep secrets` | grep ${HELM_SECRETS_VERSION} &> /dev/null
 installed_version=$?
 if [[ ${installed_version} -ne 0 ]]; then 
     echo "helm secrets version missmatch, start re-install"
