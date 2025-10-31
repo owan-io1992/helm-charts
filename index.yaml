@@ -128,6 +128,27 @@ entries:
     urls:
     - https://github.com/owan-io1992/helm-charts/releases/download/lens-metric-proxy-0.1.0/lens-metric-proxy-0.1.0.tgz
     version: 0.1.0
+  minio:
+  - annotations:
+      artifacthub.io/thanks: |
+        - name: cleanstart/minio
+          url: https://hub.docker.com/r/cleanstart/minio
+        - name: georgmangold/console
+          url: https://github.com/georgmangold/console
+    apiVersion: v2
+    appVersion: "0.20250907"
+    created: "2025-10-31T12:22:46.586151562Z"
+    description: A Helm chart for Kubernetes, featuring MinIO. Special thanks to cleanstart/minio
+      and georgmangold/console for their excellent work.
+    digest: 6faa621fa2fcd3ce7a937679c31bb4e9f091b2501435e65c04da86b7d318b74b
+    name: minio
+    sources:
+    - https://hub.docker.com/r/cleanstart/minio
+    - https://github.com/georgmangold/console/tree/main
+    type: application
+    urls:
+    - https://github.com/owan-io1992/helm-charts/releases/download/minio-0.1.0/minio-0.1.0.tgz
+    version: 0.1.0
   redmine:
   - apiVersion: v2
     appVersion: 6.0.5
@@ -154,4 +175,4 @@ entries:
     urls:
     - https://github.com/owan-io1992/helm-charts/releases/download/shlink-0.1.0/shlink-0.1.0.tgz
     version: 0.1.0
-generated: "2025-08-06T20:07:48.631604341+08:00"
+generated: "2025-10-31T12:22:46.586184554Z"
