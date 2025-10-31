@@ -1,6 +1,21 @@
-minio login info:
-  username: {{ .Values.minio.minio_root_user }}
-  password: {{ .Values.minio.minio_root_password }}
+Your MinIO has been deployed.
 
-Visit minio console:
-  kubectl --namespace {{ .Release.Namespace }} port-forward svc/{{ include "minio.fullname" . }}-console 9090:{{ .Values.console.service.port }}
+1. Get your MinIO credentials:
+   Username: {{ .Values.minio.minio_root_user }}
+   Password:
+     export MINIO_ROOT_PASSWORD=$(kubectl get secret --namespace {{ .Release.Namespace }} {{ include "minio.fullname" . }} -o jsonpath="{.data.MINIO_ROOT_PASSWORD}" | base64 -d)
+     echo "MinIO Password: $MINIO_ROOT_PASSWORD"
+
+2. Access the MinIO Console:
+   You can access the MinIO console by port-forwarding the console service.
+
+   kubectl port-forward --namespace {{ .Release.Namespace }} svc/{{ include "minio.fullname" . }}-console 9090:{{ .Values.console.service.port }}
+
+   Then open your browser and go to http://127.0.0.1:9090
+
+3. Access the MinIO S3 API:
+   You can also access the MinIO S3 API directly.
+
+   kubectl port-forward --namespace {{ .Release.Namespace }} svc/{{ include "minio.fullname" . }}-s3api 9000:{{ .Values.minio.service.s3api.port }}
+
+   The S3 endpoint will be available at http://127.0.0.1:9000

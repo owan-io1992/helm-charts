@@ -4,7 +4,13 @@
 
 this chart help create a [httpbin](https://github.com/mccutchen/go-httpbin) for internal testing  
 it's have multiple api  
-please read official [doc](https://httpbingo.org) for more info
+please read official [doc](https://httpbingo.org) for more info 
+
+## Maintainers
+
+| Name | Email | Url |
+| ---- | ------ | --- |
+| owan |  |  |
 
 ## Values
 
@@ -48,7 +54,7 @@ please read official [doc](https://httpbingo.org) for more info
 | readinessProbe.httpGet.path | string | `"/anything/readinessProbe"` |  |
 | readinessProbe.httpGet.port | string | `"http"` |  |
 | readinessProbe.periodSeconds | int | `10` |  |
-| replicaCount | string | `"aa"` | Number of httpbin replicas to deploy |
+| replicaCount | int | `1` | Number of httpbin replicas to deploy |
 | resources | object | `{}` | Resource limits and requests |
 | securityContext | object | `{}` | Container security context |
 | service | object | `{"port":8080,"type":"ClusterIP"}` | Service configuration |
