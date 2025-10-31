@@ -1,0 +1,6 @@
+minio login info:
+  username: {{ .Values.minio.minio_root_user }}
+  password: {{ .Values.minio.minio_root_password }}
+
+Visit minio console:
+  kubectl --namespace {{ .Release.Namespace }} port-forward svc/{{ include "minio.fullname" . }}-console 9090:{{ .Values.console.service.port }}

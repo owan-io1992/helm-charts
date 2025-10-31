@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "minio.fullname" . }}-console
+  labels:
+    {{- include "minio.console.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.console.service.type }}
+  ports:
+    - port: {{ .Values.console.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "minio.console.selectorLabels" $ | nindent 4 }}

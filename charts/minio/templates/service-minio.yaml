@@ -1,0 +1,18 @@
+{{- range $k, $v := .Values.minio.service }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "minio.fullname" $ }}-{{ $k }}
+  labels:
+    {{- include "minio.labels" $ | nindent 4 }}
+spec:
+  type: {{ $v.type }}
+  ports:
+    - port: {{ $v.port }}
+      targetPort: {{ $k }}
+      protocol: TCP
+      name: {{ $k }}
+  selector:
+    {{- include "minio.selectorLabels" $ | nindent 4 }}
+{{- end }}

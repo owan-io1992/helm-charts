@@ -58,15 +58,6 @@ spec:
           volumeMounts:
           - name: data
             mountPath: /home/debian/.devpi/server
-  volumeClaimTemplates:
-  - metadata:
-      name: data
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      storageClassName: {{ .Values.persistentStorage.storageClassName }}
-      resources:
-        requests:
-          storage: {{ .Values.persistentStorage.size }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -79,3 +70,12 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: {{ .Values.persistentStorage.storageClassName }}
+      resources:
+        requests:
+          storage: {{ .Values.persistentStorage.size }}
