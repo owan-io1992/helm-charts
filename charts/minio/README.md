@@ -63,7 +63,6 @@ A Helm chart for Kubernetes, featuring MinIO. Special thanks to cleanstart/minio
 | minio.service.s3api.type | string | `"ClusterIP"` | S3 API service type. |
 | minio.tolerations | list | `[]` | Tolerations for pod scheduling. ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/ |
 | nameOverride | string | `""` | String to partially override `minio.fullname` template. |
-| serviceAccount | object | `{"annotations":{},"automount":true,"create":false,"name":""}` | Service account configuration. ref: https://kubernetes.io/docs/concepts/security/service-accounts/ |
 | serviceAccount.annotations | object | `{}` | Annotations to add to the service account. |
 | serviceAccount.automount | bool | `true` | Automatically mount a ServiceAccount's API credentials? |
 | serviceAccount.create | bool | `false` | Specifies whether a service account should be created. |

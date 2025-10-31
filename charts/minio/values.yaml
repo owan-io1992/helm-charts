@@ -7,18 +7,16 @@ nameOverride: ""
 # -- String to fully override `minio.fullname` template.
 fullnameOverride: ""
 
-# -- Service account configuration.
-# ref: https://kubernetes.io/docs/concepts/security/service-accounts/
 serviceAccount:
   # -- Specifies whether a service account should be created.
   create: false
-  # -- Automatically mount a ServiceAccount's API credentials?
-  automount: true
-  # -- Annotations to add to the service account.
-  annotations: {}
   # -- The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
   name: ""
+  # -- Annotations to add to the service account.
+  annotations: {}
+  # -- Automatically mount a ServiceAccount's API credentials?
+  automount: true
 
 minio:
   # -- MinIO container image configuration.
@@ -26,10 +24,10 @@ minio:
   image:
     # -- MinIO image repository.
     repository: cleanstart/minio
-    # -- MinIO image pull policy.
-    pullPolicy: IfNotPresent
     # -- Overrides the image tag whose default is the chart appVersion.
     tag: ""
+    # -- MinIO image pull policy.
+    pullPolicy: IfNotPresent
 
   # -- Secrets for pulling an image from a private repository.
   # ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
@@ -46,14 +44,58 @@ minio:
   # - bucket1
   # - bucket2
 
-  # -- Persistent storage configuration.
-  persistentStorage:
-    # -- Persistent volume access modes.
-    accessModes: ["ReadWriteOnce"]
-    # -- Storage class name for persistent volume.
-    storageClassName: ""
-    # -- Size of the persistent volume.
-    size: "5Gi"
+  # -- Arguments to pass to the MinIO server.
+  args: ["server", "/data", "--console-address", ":9001"]
+
+  # -- Service configuration.
+  # ref: https://kubernetes.io/docs/concepts/services-networking/service/
+  service:
+    s3api:
+      # -- S3 API service type.
+      type: ClusterIP
+      # -- S3 API service port.
+      port: 9000
+    # -- use georgmangold/console instead
+    # console:
+    #   type: ClusterIP
+    #   port: 9001
+
+  # -- Annotations to add to the pod.
+  # ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
+  podAnnotations: {}
+  # -- Labels to add to the pod.
+  # ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
+  podLabels: {}
+
+  # -- Security context for the pod.
+  # ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
+  podSecurityContext:
+    fsGroup: 1000
+
+  # -- Security context for the container.
+  # ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 1000
+    runAsGroup: 1000
+    readOnlyRootFilesystem: true
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop: ["ALL"]
+
+  # -- Resource requests and limits for the MinIO container.
+  # ref: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+  resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 500m
+  #   memory: 512Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 256Mi
 
   # -- Liveness and readiness probes configuration.
   # ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
@@ -83,77 +125,35 @@ minio:
   # ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
   affinity: {}
 
-  # -- Arguments to pass to the MinIO server.
-  args: ["server", "/data", "--console-address", ":9001"]
-
-  # -- Annotations to add to the pod.
-  # ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
-  podAnnotations: {}
-  # -- Labels to add to the pod.
-  # ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
-  podLabels: {}
-
-  # -- Security context for the pod.
-  # ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
-  podSecurityContext:
-    fsGroup: 1000
-
-  # -- Security context for the container.
-  # ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
-  securityContext:
-    runAsNonRoot: true
-    runAsUser: 1000
-    runAsGroup: 1000
-    readOnlyRootFilesystem: true
-    allowPrivilegeEscalation: false
-    capabilities:
-      drop: ["ALL"]
-
-  # -- Service configuration.
-  # ref: https://kubernetes.io/docs/concepts/services-networking/service/
-  service:
-    s3api:
-      # -- S3 API service type.
-      type: ClusterIP
-      # -- S3 API service port.
-      port: 9000
-    # -- use georgmangold/console instead
-    # console:
-    #   type: ClusterIP
-    #   port: 9001
-
-  # -- Resource requests and limits for the MinIO container.
-  # ref: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
-  resources: {}
-    # We usually recommend not to specify default resources and to leave this as a conscious
-    # choice for the user. This also increases chances charts run on environments with little
-    # resources, such as Minikube. If you do want to specify resources, uncomment the following
-    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-    # limits:
-    #   cpu: 500m
-    #   memory: 512Mi
-    # requests:
-    #   cpu: 100m
-    #   memory: 256Mi
+  # -- Persistent storage configuration.
+  persistentStorage:
+    # -- Persistent volume access modes.
+    accessModes: ["ReadWriteOnce"]
+    # -- Size of the persistent volume.
+    size: "5Gi"
+    # -- Storage class name for persistent volume.
+    storageClassName: ""
 
 # -- MinIO Console configuration.
 # ref: https://github.com/georgmangold/console
 console:
+  # -- Number of replicas for the MinIO Console deployment.
+  # ref: https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/
+  replicaCount: 1
+
   # -- MinIO Console container image configuration.
   # ref: https://kubernetes.io/docs/concepts/containers/images/
   image:
     # -- MinIO Console image repository.
     repository: ghcr.io/georgmangold/console
-    # -- MinIO Console image pull policy.
-    pullPolicy: IfNotPresent
     # -- Overrides the image tag whose default is the chart appVersion.
     tag: "v1.8.1"
+    # -- MinIO Console image pull policy.
+    pullPolicy: IfNotPresent
 
-  service:
-    # -- MinIO Console service type.
-    type: ClusterIP
-    # -- MinIO Console service port.
-    port: 9090
+  # -- Secrets for pulling an image from a private repository.
+  # ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+  imagePullSecrets: []
 
   # -- Environment variables for the MinIO Console.
   # ref: https://github.com/georgmangold/console/blob/main/docs/Environment.md
@@ -163,25 +163,11 @@ console:
     - name: "CONSOLE_MINIO_REGION"
       value: "us-east-1"
 
-  # -- Secrets for pulling an image from a private repository.
-  # ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
-  imagePullSecrets: []
-
-  # -- Node labels for pod assignment.
-  # ref: https://kubernetes.io/docs/user-guide/node-selection/
-  nodeSelector: {}
-
-  # -- Tolerations for pod scheduling.
-  # ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
-  tolerations: []
-
-  # -- Affinity for pod scheduling.
-  # ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
-  affinity: {}
-
-  # -- Number of replicas for the MinIO Console deployment.
-  # ref: https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/
-  replicaCount: 1
+  service:
+    # -- MinIO Console service type.
+    type: ClusterIP
+    # -- MinIO Console service port.
+    port: 9090
 
   # -- Annotations to add to the pod.
   # ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
@@ -201,13 +187,25 @@ console:
   # -- Resource requests and limits for the MinIO Console container.
   # ref: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
   resources: {}
-    # We usually recommend not to specify default resources and to leave this as a conscious
-    # choice for the user. This also increases chances charts run on environments with little
-    # resources, such as Minikube. If you do want to specify resources, uncomment the following
-    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-    # limits:
-    #   cpu: 100m
-    #   memory: 128Mi
-    # requests:
-    #   cpu: 50m
-    #   memory: 64Mi
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 50m
+  #   memory: 64Mi
+
+  # -- Node labels for pod assignment.
+  # ref: https://kubernetes.io/docs/user-guide/node-selection/
+  nodeSelector: {}
+
+  # -- Tolerations for pod scheduling.
+  # ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+  tolerations: []
+
+  # -- Affinity for pod scheduling.
+  # ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
+  affinity: {}
