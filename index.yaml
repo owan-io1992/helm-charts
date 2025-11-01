@@ -137,6 +137,31 @@ entries:
           url: https://github.com/georgmangold/console
     apiVersion: v2
     appVersion: "0.20250907"
+    created: "2025-11-01T04:17:18.315610834Z"
+    description: A Helm chart for Kubernetes, featuring MinIO. Special thanks to cleanstart/minio
+      and georgmangold/console for their excellent work.
+    digest: 91addf91482e574d9b55b9af08b76def7f571c09b98a202b8661d7bdb3af95ac
+    keywords:
+    - minio
+    - storage
+    - object-storage
+    - s3
+    name: minio
+    sources:
+    - https://hub.docker.com/r/cleanstart/minio
+    - https://github.com/georgmangold/console/tree/main
+    type: application
+    urls:
+    - https://github.com/owan-io1992/helm-charts/releases/download/minio-0.1.1/minio-0.1.1.tgz
+    version: 0.1.1
+  - annotations:
+      artifacthub.io/thanks: |
+        - name: cleanstart/minio
+          url: https://hub.docker.com/r/cleanstart/minio
+        - name: georgmangold/console
+          url: https://github.com/georgmangold/console
+    apiVersion: v2
+    appVersion: "0.20250907"
     created: "2025-10-31T12:22:46.586151562Z"
     description: A Helm chart for Kubernetes, featuring MinIO. Special thanks to cleanstart/minio
       and georgmangold/console for their excellent work.
@@ -175,4 +200,4 @@ entries:
     urls:
     - https://github.com/owan-io1992/helm-charts/releases/download/shlink-0.1.0/shlink-0.1.0.tgz
     version: 0.1.0
-generated: "2025-10-31T12:22:46.586184554Z"
+generated: "2025-11-01T04:17:18.315634188Z"
