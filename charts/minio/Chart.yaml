@@ -1,6 +1,6 @@
 apiVersion: v2
 name: minio
-version: 0.1.0
+version: 0.1.1
 appVersion: "0.20250907"
 type: application
 description: A Helm chart for Kubernetes, featuring MinIO. Special thanks to cleanstart/minio and georgmangold/console for their excellent work.
@@ -13,3 +13,8 @@ annotations:
       url: https://hub.docker.com/r/cleanstart/minio
     - name: georgmangold/console
       url: https://github.com/georgmangold/console
+keywords:
+  - minio
+  - storage
+  - object-storage
+  - s3

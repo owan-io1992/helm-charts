@@ -38,7 +38,7 @@ spec:
           securityContext:
             {{- toYaml . | nindent 12 }}
   {{- end }}
-          command: ['sh', '-c', "cd /data/ && mkdir {{- range $.Values.minio.buckets }} {{ . }}{{- end }}"]
+          command: ['sh', '-c', "cd /data/ && mkdir -p {{- range $.Values.minio.buckets }} {{ . }}{{- end }}"]
           volumeMounts:
           - name: data
             mountPath: /data
