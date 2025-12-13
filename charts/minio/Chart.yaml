@@ -1,7 +1,7 @@
 apiVersion: v2
 name: minio
-version: 0.1.1
-appVersion: "0.20250907"
+version: 0.1.2
+appVersion: "latest"
 type: application
 description: A Helm chart for Kubernetes, featuring MinIO. Special thanks to cleanstart/minio and georgmangold/console for their excellent work.
 sources:
