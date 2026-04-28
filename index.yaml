@@ -115,6 +115,21 @@ entries:
     urls:
     - https://github.com/owan-io1992/helm-charts/releases/download/httpbin-0.1.0/httpbin-0.1.0.tgz
     version: 0.1.0
+  httpbun:
+  - apiVersion: v2
+    appVersion: latest
+    created: "2026-04-28T13:41:03.712185322Z"
+    description: 'this chart help create a [httpbun](https://github.com/sharat87/httpbun)
+      for internal testing    it''s have multiple api    please read official [doc](https://httpbun.com)
+      for more info   '
+    digest: 6b204b296e996485d361c5aaea0af0953c0e118e6eda8593bc09f8e0f6000490
+    maintainers:
+    - name: owan
+    name: httpbun
+    type: application
+    urls:
+    - https://github.com/owan-io1992/helm-charts/releases/download/httpbun-0.1.0/httpbun-0.1.0.tgz
+    version: 0.1.0
   lens-metric-proxy:
   - apiVersion: v2
     appVersion: stable
@@ -225,4 +240,4 @@ entries:
     urls:
     - https://github.com/owan-io1992/helm-charts/releases/download/shlink-0.1.0/shlink-0.1.0.tgz
     version: 0.1.0
-generated: "2025-12-13T08:31:14.752251347Z"
+generated: "2026-04-28T13:41:03.904648137Z"
