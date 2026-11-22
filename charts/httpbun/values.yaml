@@ -77,30 +77,20 @@ ingress:
   # -- Ingress TLS configuration
   # tls: []
 
-# -- Gateway API configuration
-gateway:
-  # -- Enable gateway support
+# -- Gateway API HTTPRoute configuration.
+# The chart only creates an HTTPRoute. The Gateway must already exist.
+httpRoute:
+  # -- Enable HTTPRoute
   enabled: false
-  # -- The name of the GatewayClass resource.
-  # In GKE, this should be "gke-l7-gxlb" for multi-cluster and "gke-l7-rilb" for single-cluster.
-  # In Istio, this should be "istio".
-  gatewayClassName: ""
-  # -- The name of an existing Gateway resource to bind to.
-  # If not specified, a new Gateway resource is created.
-  gatewayName: ""
-  # -- The namespace of an existing Gateway resource to bind to.
-  # If not specified, the new Gateway resource is created in the same namespace as the chart.
-  gatewayNamespace: ""
-  # -- Listeners for the Gateway resource.
-  # The name of the listener should match an entryPoint on the Gateway Controller.
-  listeners:
-    - name: http
-      port: 80
-      protocol: HTTP
-      allowedRoutes:
-        namespaces:
-          from: Same
-  # -- Hosts for the Gateway resource
+  # -- HTTPRoute annotations
+  annotations: {}
+  # -- Gateways the HTTPRoute attaches to.
+  # Each item is a Gateway API parentRef (name, namespace, sectionName, ...).
+  parentRefs: []
+    # - name: my-gateway
+    #   namespace: gateway-system
+    #   sectionName: http
+  # -- Hosts and paths for the HTTPRoute
   hosts:
     - host: chart-example.local
       paths:

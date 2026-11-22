@@ -18,13 +18,11 @@ please read official [doc](https://httpbun.com) for more info
 |-----|------|---------|-------------|
 | affinity | object | `{}` | Affinity for pod assignment |
 | fullnameOverride | string | `""` | Override the full chart name |
-| gateway | object | `{"enabled":false,"gatewayClassName":"","gatewayName":"","gatewayNamespace":"","hosts":[{"host":"chart-example.local","paths":[{"path":"/","pathType":"PathPrefix"}]}],"listeners":[{"allowedRoutes":{"namespaces":{"from":"Same"}},"name":"http","port":80,"protocol":"HTTP"}]}` | Gateway API configuration |
-| gateway.enabled | bool | `false` | Enable gateway support |
-| gateway.gatewayClassName | string | `""` | The name of the GatewayClass resource. In GKE, this should be "gke-l7-gxlb" for multi-cluster and "gke-l7-rilb" for single-cluster. In Istio, this should be "istio". |
-| gateway.gatewayName | string | `""` | The name of an existing Gateway resource to bind to. If not specified, a new Gateway resource is created. |
-| gateway.gatewayNamespace | string | `""` | The namespace of an existing Gateway resource to bind to. If not specified, the new Gateway resource is created in the same namespace as the chart. |
-| gateway.hosts | list | `[{"host":"chart-example.local","paths":[{"path":"/","pathType":"PathPrefix"}]}]` | Hosts for the Gateway resource |
-| gateway.listeners | list | `[{"allowedRoutes":{"namespaces":{"from":"Same"}},"name":"http","port":80,"protocol":"HTTP"}]` | Listeners for the Gateway resource. The name of the listener should match an entryPoint on the Gateway Controller. |
+| httpRoute | object | `{"annotations":{},"enabled":false,"hosts":[{"host":"chart-example.local","paths":[{"path":"/","pathType":"PathPrefix"}]}],"parentRefs":[]}` | Gateway API HTTPRoute configuration. The chart only creates an HTTPRoute. The Gateway must already exist. |
+| httpRoute.annotations | object | `{}` | HTTPRoute annotations |
+| httpRoute.enabled | bool | `false` | Enable HTTPRoute |
+| httpRoute.hosts | list | `[{"host":"chart-example.local","paths":[{"path":"/","pathType":"PathPrefix"}]}]` | Hosts and paths for the HTTPRoute |
+| httpRoute.parentRefs | list | `[]` | Gateways the HTTPRoute attaches to. Each item is a Gateway API parentRef (name, namespace, sectionName, ...). |
 | image | object | `{"pullPolicy":"IfNotPresent","repository":"sharat87/httpbun","tag":""}` | Container image configuration |
 | image.pullPolicy | string | `"IfNotPresent"` | Image pull policy |
 | image.repository | string | `"sharat87/httpbun"` | Image repository |
